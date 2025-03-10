@@ -3,6 +3,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TextureLoader } from 'three';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import Stats from 'three/addons/libs/stats.module.js'
+import { Terrain } from './terrain';
+
 
 const stats = new Stats()
 document.body.appendChild(stats.dom)
@@ -27,12 +29,14 @@ const material = new THREE.MeshStandardMaterial( {
 const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 const dirLight = new THREE.DirectionalLight()
-dirLight.position.set(1, 1, 1)
+dirLight.position.set(1, 2, 3)
 scene.add(dirLight)
 const ambient = new THREE.AmbientLight()
 scene.add(ambient)
+const terrain = new Terrain(10, 10)
+scene.add(terrain)
 
-camera.position.z = 5;
+camera.position.z = 4;
 const gui = new GUI()
 const folder = gui.addFolder('Cube')
 folder.add(cube.position, 'x', -2, 2, 1).name('X position')
