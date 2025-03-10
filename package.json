@@ -1,0 +1,19 @@
+{
+  "name": "comeback",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mbugua",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "vite": "^6.2.1"
+  },
+  "dependencies": {
+    "three": "^0.174.0"
+  }
+}
