@@ -13,6 +13,8 @@ const loader = new TextureLoader()
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('skyblue')
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera.position.set(10, 10, 10)
+
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -21,13 +23,7 @@ const container = document.getElementById('scene-container')
 container.appendChild( renderer.domElement );
 const controls = new OrbitControls(camera, renderer.domElement)
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const texture = loader.load("assets/textures/pexels-steve-1585325.jpg")
-const material = new THREE.MeshStandardMaterial( { 
-    map: texture
- } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+
 const dirLight = new THREE.DirectionalLight()
 dirLight.position.set(1, 2, 3)
 scene.add(dirLight)
@@ -38,10 +34,13 @@ scene.add(terrain)
 
 camera.position.z = 4;
 const gui = new GUI()
-const folder = gui.addFolder('Cube')
-folder.add(cube.position, 'x', -2, 2, 1).name('X position')
-folder.add(cube.position, 'y', -2, 2, 1).name('Y position')
-folder.add(cube.position, 'z', -2, 2, 1).name('Z position')
+const terrainfolder = gui.addFolder('Terrain')
+terrainfolder.add(terrain, 'width', 1, 20, 1).name('width')
+terrainfolder.add(terrain, 'height', 1, 20, 1).name('height')
+terrainfolder.addColor(terrain.material, 'color').name('Color')
+terrainfolder.onChange(()=>{
+    terrain.createGeometry();
+})
 controls.update()
 animate()
 function animate() {
